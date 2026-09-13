@@ -176,7 +176,7 @@ export const flowTurnerCta = {
 
 export const footer = {
   contactLabel: 'Contact',
-  email: 'nahidsain73@gmail.com',
+  email: 'afshahossain13@gmail.com',
   colophon: 'All Rights Reserved | Developed by Bitflex Australia',
   developer: { label: 'Bitflex Australia', href: '#' },
 }

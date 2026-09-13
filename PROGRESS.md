@@ -87,6 +87,13 @@ Built from the new Figma strip node `62:85` (`get_design_context`).
 
 ---
 
+## Session — 2026-09-13
+
+### 16. Footer contact email updated
+- `footer.email` (`src/data/content.js`) changed from `nahidsain73@gmail.com` to `afshahossain13@gmail.com` — now matches the Foreword modal's signature email. Drives both the displayed text and the `mailto:` link in `SiteFooter.vue`.
+
+---
+
 ## Still open / needs client input
 - Action buttons "Buy Now", "Read an Excerpt" internal link, legal links point to `#`.
 - Helvetica Neue ships as OTF (~890 KB for two weights) — convert Roman + Medium to woff2 before launch.
