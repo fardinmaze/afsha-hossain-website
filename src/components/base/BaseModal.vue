@@ -4,6 +4,7 @@ import { ref, watch, onBeforeUnmount } from 'vue'
 const props = defineProps({
   open: { type: Boolean, default: false },
   label: { type: String, default: 'Dialog' },
+  size: { type: String, default: 'md' }, // 'md' (920px) | 'sm' (680px, text-only popups)
 })
 const emit = defineEmits(['close'])
 
@@ -23,8 +24,9 @@ watch(
   },
 )
 
+// Keep the page locked if another popup opened as this one closed
 function restore() {
-  document.body.style.overflow = ''
+  if (!document.querySelector('dialog[open]')) document.body.style.overflow = ''
 }
 function onClose() {
   restore()
@@ -41,6 +43,7 @@ onBeforeUnmount(restore)
   <dialog
     ref="dlg"
     class="modal"
+    :class="`modal--${size}`"
     :aria-label="label"
     @close="onClose"
     @cancel.prevent="emit('close')"
@@ -75,6 +78,9 @@ onBeforeUnmount(restore)
   border-radius: clamp(18px, 3vw, 28px);
   background: transparent;
   overflow: visible;
+}
+.modal--sm {
+  width: min(680px, calc(100vw - 32px));
 }
 .modal::backdrop {
   background: rgba(51, 0, 0, 0.55);

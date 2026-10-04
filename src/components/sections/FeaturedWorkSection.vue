@@ -1,7 +1,14 @@
 <script setup>
+import { ref } from 'vue'
 import BaseButton from '../base/BaseButton.vue'
 import SectionLabel from '../base/SectionLabel.vue'
-import { featuredWork as fw } from '@/data/content.js'
+import BookPopups from './BookPopups.vue'
+import { featuredWork as fw, purchase } from '@/data/content.js'
+
+// Which popup is open: null | 'buy' | 'terms' | 'safety'
+const popup = ref(null)
+
+const purchaseHref = `mailto:${fw.purchaseEmail.email}?subject=${encodeURIComponent(purchase.subject)}`
 </script>
 
 <template>
@@ -48,18 +55,52 @@ import { featuredWork as fw } from '@/data/content.js'
           </p>
 
           <div class="fw__actions">
-            <BaseButton
-              v-for="a in fw.actions"
-              :key="a.label"
-              :href="a.href"
-              :variant="a.variant"
+            <template v-for="a in fw.actions" :key="a.label">
+              <BaseButton v-if="a.modal" as="button" :variant="a.variant" @click="popup = a.modal">
+                {{ a.label }}
+              </BaseButton>
+              <BaseButton v-else :href="a.href" :variant="a.variant">
+                {{ a.label }}
+              </BaseButton>
+            </template>
+          </div>
+
+          <p class="fw__purchase">
+            {{ fw.purchaseEmail.label }}:
+            <a :href="purchaseHref">{{ fw.purchaseEmail.email }}</a>
+          </p>
+
+          <div class="fw__boxes">
+            <button
+              v-for="box in fw.infoBoxes"
+              :key="box.id"
+              type="button"
+              class="fw__box"
+              :class="`fw__box--${box.id}`"
+              aria-haspopup="dialog"
+              @click="popup = box.id"
             >
-              {{ a.label }}
-            </BaseButton>
+              <span class="fw__box-icon" aria-hidden="true">
+                <img v-if="box.id === 'safety'" src="/images/safety-hands.png" alt="" width="120" height="82" />
+                <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <path d="M7 3.5h7l4 4V20a.5.5 0 0 1-.5.5h-10A.5.5 0 0 1 7 20V3.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+                  <path d="M14 3.5V8h4M9.5 12h6M9.5 15.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+                </svg>
+              </span>
+              <span class="fw__box-text">
+                <span class="fw__box-title">{{ box.title }}</span>
+                <span class="fw__box-sub">{{ box.text }}</span>
+              </span>
+              <svg class="fw__box-plus" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
     </div>
+
+    <BookPopups v-model="popup" :purchase-href="purchaseHref" />
   </section>
 </template>
 
@@ -178,7 +219,103 @@ import { featuredWork as fw } from '@/data/content.js'
   gap: 14px;
 }
 
+.fw__purchase {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+.fw__purchase a {
+  color: var(--brand-600);
+  font-weight: 500;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+.fw__purchase a:hover {
+  color: var(--brand-800);
+}
+
+/* Two info boxes that open popups */
+.fw__boxes {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 560px;
+}
+.fw__box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--brand-100);
+  color: var(--brand-700);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    box-shadow 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out),
+    background-color 0.25s var(--ease-out);
+}
+.fw__box:hover {
+  background: var(--brand-50);
+  box-shadow: inset 0 0 0 1px var(--brand-300);
+  transform: translateY(-2px);
+}
+.fw__box:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 3px;
+}
+.fw__box-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--brand-50);
+  color: var(--brand-600);
+}
+.fw__box--safety .fw__box-icon {
+  background: #e6f2e8;
+}
+.fw__box-icon img {
+  width: 28px;
+  height: auto;
+}
+.fw__box-text {
+  flex: 1;
+  display: grid;
+  gap: 2px;
+}
+.fw__box-title {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.fw__box-sub {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+.fw__box-plus {
+  flex: none;
+  color: var(--brand-500);
+}
+
+@media (max-width: 520px) {
+  .fw__boxes {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 860px) {
+  .fw__boxes {
+    margin-inline: auto;
+  }
   .fw__grid {
     grid-template-columns: 1fr;
     justify-items: center;

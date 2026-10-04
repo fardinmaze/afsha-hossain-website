@@ -3,6 +3,7 @@ import SiteNavbar from './components/layout/SiteNavbar.vue'
 import SiteFooter from './components/layout/SiteFooter.vue'
 import HeroSection from './components/sections/HeroSection.vue'
 import FeaturedWorkSection from './components/sections/FeaturedWorkSection.vue'
+import GuardianSection from './components/sections/GuardianSection.vue'
 import MeetAfshaSection from './components/sections/MeetAfshaSection.vue'
 import PhotoStripSection from './components/sections/PhotoStripSection.vue'
 import WritersCentreSection from './components/sections/WritersCentreSection.vue'
@@ -17,6 +18,7 @@ import BackToTop from './components/base/BackToTop.vue'
   <main>
     <HeroSection />
     <FeaturedWorkSection />
+    <GuardianSection />
     <MeetAfshaSection />
     <PhotoStripSection />
     <WritersCentreSection />

@@ -44,9 +44,103 @@ export const featuredWork = {
   ],
   legal: ['Privacy Policy', 'Terms of Use'],
   actions: [
-    { label: 'Buy Now', href: '#', variant: 'primary' },
+    { label: 'Buy Now', variant: 'primary', modal: 'buy' },
     { label: 'Discover the Book', href: '#flow-turner', variant: 'secondary' },
   ],
+  purchaseEmail: { label: 'Email for purchase', email: 'purchase.ahereader@gmail.com' },
+  // The two boxes under the buttons; each opens a popup (client change request, Oct 2026)
+  infoBoxes: [
+    { id: 'terms', title: 'Sales Terms & Conditions', text: 'Prices, payment, delivery and returns' },
+    { id: 'safety', title: 'Safety and suitability', text: 'How we keep young readers safe' },
+  ],
+}
+
+// Section after Featured Work. PLACEHOLDER wording – confirm with the client.
+export const guardian = {
+  label: 'Under Supervision of Legal Guardian',
+  heading: 'Afsha is a young author.',
+  body: 'This website, the sale of her book and all communication are managed under the supervision of her legal guardian.',
+  points: [
+    'Orders, payments and deliveries are handled by her legal guardian.',
+    'Messages sent to Afsha through this website are read by her legal guardian first.',
+    'Photos and stories on this website are shared with her legal guardian’s consent.',
+  ],
+  contact: { label: 'Questions for her legal guardian?', email: 'afshahossain13@gmail.com' },
+}
+
+// "Buy Now" popup. Payment is PayID or bank transfer only; orders go by email.
+export const purchase = {
+  eyebrow: 'The Life of Flow Turner',
+  title: 'Buy the book',
+  price: 'AU$7.95',
+  priceNote: 'No GST included',
+  payment: 'PayID or Bank Transfer only',
+  // PLACEHOLDER wording – confirm with the client (they may want PayID / bank details shown here)
+  steps: [
+    'Email us with your name, delivery address and the number of copies you would like.',
+    'We will reply with the PayID or bank transfer details and your total.',
+    'Once payment is received, your book is posted within 7 to 10 business days.',
+  ],
+  cta: 'Email to purchase',
+  subject: 'Book order: The Life of Flow Turner',
+  termsLink: 'Read the Sales Terms & Conditions',
+}
+
+// Sales Terms & Conditions popup (text from the client's PDF)
+export const salesTerms = {
+  title: 'Sales Terms & Conditions',
+  items: [
+    {
+      heading: 'Prices',
+      body: 'All prices shown on this website are in Australian Dollars, are subject to change without notice, and do not include GST.',
+    },
+    { heading: 'Payment Mode', body: 'PayID or Bank Transfer only.' },
+    {
+      heading: 'Delivery',
+      body: 'We will pick the most appropriate freight service to get your order to you as quickly as possible. Our standard delivery timeline is 7 to 10 business days, excluding weekends and public holidays.',
+    },
+    {
+      heading: 'Back Orders',
+      body: 'If you try to order a book that is not in stock, the availability status should quote "Temporarily out of stock". The sheer volume of products being invoiced daily may result in stock running out before the website updates.',
+    },
+    {
+      heading: 'Quality Guarantee',
+      body: "All items we sell are brand new, freshly printed from the publisher. We don't sell second-hand books and never sell damaged stock as new items. All books available for sale on this website are offered as new, unless otherwise indicated or heavily discounted to clear.",
+    },
+    {
+      heading: 'Goods Returned For Credit',
+      body: 'All books bought "On Approval" can be returned for a full credit if returned within 15 days of the invoice date. Return freight is the responsibility of the sender, and goods must be received by us in a saleable condition. A Returns Authorisation will be given if the goods are faulty, and they can be replaced with a new copy or credited to your account.',
+    },
+  ],
+}
+
+// Safety and suitability popup (text from the client's PDF)
+export const safety = {
+  title: 'Safety and suitability',
+  intro:
+    "Welcome to a digital haven where children's books come alive safely, creatively, and without compromise.",
+  points: [
+    {
+      heading: 'Absolute Under Parental Observation',
+      body: 'Every aspect of the platform operates under your direct supervision, ensuring complete peace of mind while your child explores.',
+    },
+    {
+      heading: 'Zero Random Exposure',
+      body: 'Say goodbye to unpredictable search results and rabbit holes. We handpick and curate every piece of content to protect your child from unexpected material.',
+    },
+    {
+      heading: 'No Third-Party Feeds or Ads',
+      body: 'There are no algorithms, external ads, or distracting social feeds designed to capture your child’s attention. Just pure, wholesome storytelling.',
+    },
+    {
+      heading: 'Screen-Smart Creativity',
+      body: 'Turn screen time into a constructive, imagination-boosting experience that encourages a genuine love for reading and creativity.',
+    },
+  ],
+  promise: {
+    heading: 'Our Promise:',
+    body: 'Total control over what reaches your child, paired with a joyful, enriching space for growing imaginations.',
+  },
 }
 
 export const meetAfsha = {

@@ -94,8 +94,22 @@ Built from the new Figma strip node `62:85` (`get_design_context`).
 
 ---
 
+## Session — 2026-10-04
+
+### 17. Buy Now, Sales Terms & Conditions, Safety and suitability
+From the client's change request `public/assets/Change View of BUY NOW.pdf`. All text is in `src/data/content.js` (`featuredWork`, `purchase`, `salesTerms`, `safety`).
+- **Buy Now** opens a "Buy the book" popup: price, "PayID or Bank Transfer only", the purchase email, 3 ordering steps (placeholder wording) and an **Email to purchase** button (`mailto:` with the subject pre-filled). (Two later versions, one showing PayID / bank details and one with input fields, were tried and reverted to this one at the client's request.)
+- **Email for purchase:** `purchase.ahereader@gmail.com` shown under the buttons.
+- **Discover the Book** unchanged.
+- Two new boxes under the buttons: **Sales Terms & Conditions** and **Safety and suitability**, each opening a popup with the PDF's text. The PDF's green hands icon is saved as `public/images/safety-hands.png`.
+- Popups live in `components/sections/BookPopups.vue`. `BaseModal` gained `size="sm"` (680px), and its scroll lock now stays on when one popup hands over to another.
+- New section **Under Supervision of Legal Guardian** right after Featured Work (`GuardianSection.vue`, `guardian` in `content.js`): a notice that the site, book sales and communication are managed by Afsha's legal guardian, 3 points and a contact email. All wording is PLACEHOLDER.
+- Small fixes to the PDF wording: "business days", "weekends", the missing space after "Back Orders:", and "second-hand".
+
 ## Still open / needs client input
-- Action buttons "Buy Now", "Read an Excerpt" internal link, legal links point to `#`.
+- Buy Now: confirm the ordering steps.
+- Guardian section: confirm the wording, the 3 points and the contact email (currently `afshahossain13@gmail.com`).
+- "Privacy Policy" / "Terms of Use" links still point to `#`. "Terms of Use" could open the new Sales T&C popup.
 - Helvetica Neue ships as OTF (~890 KB for two weights) — convert Roman + Medium to woff2 before launch.
 - Journey card 5 & 7 text has minor grammar quirks — kept **verbatim** from Figma; confirm before editing.
 - `src/assets/Fonts/` (capital F) is the raw client font package, unused by the build — safe to delete once confirmed.
